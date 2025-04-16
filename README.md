@@ -114,7 +114,8 @@ void OnTriggerEnter(Collider other)
             time_spent_rising = 0;
         }
     }
-}```
+}
+```
 
 ### Particle Effect
 
@@ -135,7 +136,6 @@ if (time_spent_rising >= time_to_spend_rising)
     particle_system.Stop();
 }
 ```
-
 ```c#
 if (rand_bed_action == 10)
 {
