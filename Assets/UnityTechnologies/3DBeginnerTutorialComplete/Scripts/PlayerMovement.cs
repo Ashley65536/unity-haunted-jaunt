@@ -19,6 +19,9 @@ public class PlayerMovement : MonoBehaviour
     private float time_spent_rising;
     private float time_to_spend_rising = 3;
 
+    public ParticleSystem particle_system;
+    bool isWalking;
+
     Vector3 original_player_pos;
 
     void Start ()
@@ -26,6 +29,7 @@ public class PlayerMovement : MonoBehaviour
         m_Animator = GetComponent<Animator> ();
         m_Rigidbody = GetComponent<Rigidbody> ();
         m_AudioSource = GetComponent<AudioSource> ();
+        //particle_system = GetComponent<ParticleSystem>();
     }
 
     void FixedUpdate()
@@ -37,6 +41,7 @@ public class PlayerMovement : MonoBehaviour
                 this.transform.position = new Vector3(-9.8f, 0.0f, -3.2f);
                 last_bed.SetActive(true);
                 rand_bed_action = -1;
+                particle_system.Stop();
             }
             else
             {
@@ -56,7 +61,7 @@ public class PlayerMovement : MonoBehaviour
 
             bool hasHorizontalInput = !Mathf.Approximately(horizontal, 0f);
             bool hasVerticalInput = !Mathf.Approximately(vertical, 0f);
-            bool isWalking = hasHorizontalInput || hasVerticalInput;
+            isWalking = hasHorizontalInput || hasVerticalInput;
             m_Animator.SetBool("IsWalking", isWalking);
 
             if (isWalking)
@@ -102,6 +107,9 @@ public class PlayerMovement : MonoBehaviour
                 rise_to_pos = original_player_pos;
                 rise_to_pos.y += 10;
                 time_spent_rising = 0;
+                particle_system.Play();
+                isWalking = false;
+                m_AudioSource.Stop();
             }
         }
     }
