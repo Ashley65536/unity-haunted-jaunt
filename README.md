@@ -56,6 +56,8 @@ Structurally, I tried to mimic the observer pattern used by the ghosts to detect
 
 Ashley Rush
 
+## Solutions
+
 ### Linear Interpolation
 
 #### Feature
